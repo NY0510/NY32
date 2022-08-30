@@ -15,7 +15,7 @@ module.exports = {
 
 		await fetch(`https://api.mojang.com/users/profiles/minecraft/${nickname}`)
 			.then(res => res.json())
-			.then(json => (uuid = json.id));
+			.then(data => (uuid = data.id));
 
 		let e = new EmbedBuilder()
 			.setTitle(`${nickname}의 마인크래프트 스킨`)

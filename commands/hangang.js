@@ -37,21 +37,21 @@ module.exports = {
 		const fetchUrl = `https://api.projecttl.net/v1/hangang/${inputLocation}`;
 		await fetch(fetchUrl)
 			.then(res => res.json())
-			.then(json => {
+			.then(data => {
 				e.addFields(
 					{
 						name: "🌡️ 온도",
-						value: `┕**\`${json.temp}℃\`**`,
+						value: `┕**\`${data.temp}℃\`**`,
 						inline: true,
 					},
 					{
 						name: "🕐 측정시각",
-						value: `┕**\`${json.date.slice("-")[1]}월 ${json.date.slice("-")[2]}일 ${json.time}\`**`,
+						value: `┕**\`${data.date} ${data.time}\`**`,
 						inline: true,
 					},
 					{
 						name: "🦠 수소이온농도",
-						value: `┕**\`${json.ph} pH\`**`,
+						value: `┕**\`${data.ph} pH\`**`,
 						inline: true,
 					}
 				);
