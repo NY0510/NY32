@@ -1,6 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
+const chalk = require("chalk");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -14,7 +15,13 @@ for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
 
-	client.commands.set(command.data.name, command);
+	try {
+		client.commands.set(command.data.name, command);
+		console.log(`${chalk.green.bold("✔")} Loaded command ${chalk.green.bold(command.data.name)}`);
+	} catch (err) {
+		console.log(`${chalk.red.bold("✖")} Failed to load command ${chalk.green.bold(command.data.name)}`);
+		console.log(`${chalk.red.bold("✖")} ${err}`);
+	}
 }
 
 // 이밴트 핸들러
@@ -24,10 +31,16 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith(".js"
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
+	try {
+		if (event.once) {
+			client.once(event.name, (...args) => event.execute(...args));
+		} else {
+			client.on(event.name, (...args) => event.execute(...args));
+		}
+		console.log(`${chalk.green.bold("✔")} Loaded event ${chalk.blue.bold(event.name)}`);
+	} catch (err) {
+		console.log(`${chalk.red.bold("✖")} Failed to load event ${chalk.blue.bold(event.name)}`);
+		console.log(`${chalk.red.bold("✖")} ${err}`);
 	}
 }
 

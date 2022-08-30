@@ -1,3 +1,5 @@
+const chalk = require("chalk");
+
 module.exports = {
 	name: "ready",
 	once: true,
@@ -10,7 +12,8 @@ module.exports = {
 			});
 		});
 
-		console.log(`Logged in as ${client.user.tag} (${client.user.id})`);
+		console.log("\n");
+		console.log(`Logged in as ${chalk.yellow.bold(client.user.tag)} ${chalk.gray(`(${client.user.id})`)}`);
 		console.log(`In ${client.guilds.cache.size} guilds, ${userCount} users\n`);
 	},
 };
