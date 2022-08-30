@@ -62,7 +62,6 @@ module.exports = {
 			.then(res => res.text())
 			.then(data => {
 				e.setFooter({ text: data });
-				mogyok;
 			});
 
 		await interaction.reply({ embeds: [e] });
