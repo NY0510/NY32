@@ -29,6 +29,7 @@ module.exports = {
 			{ name: "노량진", value: "noryangjin" },
 			{ name: "안양천", value: "anyang" },
 		];
+
 		const inputLocation = interaction.options.getString("location");
 		const locationName = locationData.find(data => data.value === inputLocation).name;
 
@@ -55,6 +56,13 @@ module.exports = {
 						inline: true,
 					}
 				);
+			});
+
+		await fetch("https://hangang.ivlis.kr/aapi.php?type=text")
+			.then(res => res.text())
+			.then(data => {
+				e.setFooter({ text: data });
+				mogyok;
 			});
 
 		await interaction.reply({ embeds: [e] });
