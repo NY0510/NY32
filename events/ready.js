@@ -1,4 +1,5 @@
 const chalk = require("chalk");
+const { ActivityType } = require("discord.js");
 
 module.exports = {
 	name: "ready",
@@ -10,6 +11,11 @@ module.exports = {
 			guild.members.cache.forEach(member => {
 				userCount++;
 			});
+		});
+
+		client.user.setPresence({
+			activities: [{ name: process.env.BOT_PRESENCE_NAME, type: ActivityType.Playing }],
+			status: process.env.BOT_PRESENCE_STATUS,
 		});
 
 		console.log("\n");
