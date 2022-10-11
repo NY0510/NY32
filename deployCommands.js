@@ -28,8 +28,8 @@ const option = process.argv[2];
 			}
 		} else if (option == "--global") {
 			console.log(`Started refreshing application (/) commands. (Global)`);
-			await rest.put(Routes.applicationCommands(process.env.BOT_CLIENT_ID, process.env.DEV_GUILD_ID), { body: commands });
-			console.log(`Successfully deleted all application (/) commands. (Global)\n`);
+			await rest.put(Routes.applicationCommands(process.env.BOT_CLIENT_ID), { body: commands });
+			console.log(`Successfully reloaded all application (/) commands. (Global)\n`);
 		} else if (option == "--delete") {
 			console.log(`Started deleted all application (/) commands. (Global)`);
 			await rest.put(Routes.applicationCommands(process.env.BOT_CLIENT_ID, process.env.DEV_GUILD_ID), { body: [] });
