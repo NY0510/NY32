@@ -18,6 +18,8 @@ module.exports = {
 			status: process.env.BOT_PRESENCE_STATUS,
 		});
 
+		client.manager.init(client.user.id);
+
 		console.log("\n");
 		console.log(`Logged in as ${chalk.yellow.bold(client.user.tag)} ${chalk.gray(`(${client.user.id})`)}`);
 		console.log(`In ${client.guilds.cache.size} guilds, ${userCount} users\n`);
